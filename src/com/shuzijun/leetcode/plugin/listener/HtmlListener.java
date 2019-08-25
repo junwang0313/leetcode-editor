@@ -24,7 +24,7 @@ import java.io.File;
 /**
  * @author shuzijun
  */
-public class HtmlListener  implements Runnable {
+public class HtmlListener implements Runnable {
 
     private final static Logger logger = LoggerFactory.getLogger(HtmlListener.class);
 
@@ -65,12 +65,12 @@ public class HtmlListener  implements Runnable {
             FileEditorManager.getInstance(project).openTextEditor(descriptor, false);
         } else {
             String body = null;
-            if(Constant.ITEM_TYPE_HTML.equals(question.getLangSlug())){
+            if (Constant.ITEM_TYPE_HTML.equals(question.getLangSlug())) {
                 body = ExploreManager.GetHtmlArticle(question);
-            }else if(Constant.ITEM_TYPE_ARTICLE.equals(question.getLangSlug())){
+            } else if (Constant.ITEM_TYPE_ARTICLE.equals(question.getLangSlug())) {
                 body = ExploreManager.GetArticle(question);
             }
-            if(StringUtils.isBlank(body)){
+            if (StringUtils.isBlank(body)) {
                 MessageUtils.showMsg(toolWindow.getContentManager().getComponent(), MessageType.INFO, "info", PropertiesUtils.getInfo("request.failed"));
                 return;
             }

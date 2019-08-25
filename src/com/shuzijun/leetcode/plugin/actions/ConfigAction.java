@@ -11,6 +11,6 @@ import com.shuzijun.leetcode.plugin.setting.SettingConfigurable;
 public class ConfigAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        ShowSettingsUtil.getInstance().showSettingsDialog(anActionEvent.getProject(),SettingConfigurable.DISPLAY_NAME);
+        ShowSettingsUtil.getInstance().showSettingsDialog(anActionEvent.getProject(), SettingConfigurable.DISPLAY_NAME);
     }
 }

@@ -50,16 +50,16 @@ public class Question {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getFormTitle() {
         StringBuffer sb = new StringBuffer();
         if (StringUtils.isNotBlank(frontendQuestionId)) {
             sb.append("[").append(frontendQuestionId).append("]");
         }
         return sb.append(title).toString();
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getQuestionId() {

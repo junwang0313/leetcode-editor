@@ -53,12 +53,7 @@ public class HttpClientUtils {
             BasicCookieStore cookieStore = new BasicCookieStore();
             context.setCookieStore(cookieStore);
 
-            RequestConfig.Builder globalConfigBuilder = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD)
-                    .setConnectTimeout(5000).setConnectionRequestTimeout(1000)
-                    .setSocketTimeout(5000)
-                    .setCookieSpec(CookieSpecs.STANDARD_STRICT)
-                    .setExpectContinueEnabled(Boolean.TRUE).setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM, AuthSchemes.DIGEST))
-                    .setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC));
+            RequestConfig.Builder globalConfigBuilder = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).setConnectTimeout(5000).setConnectionRequestTimeout(1000).setSocketTimeout(5000).setCookieSpec(CookieSpecs.STANDARD_STRICT).setExpectContinueEnabled(Boolean.TRUE).setTargetPreferredAuthSchemes(Arrays.asList(AuthSchemes.NTLM, AuthSchemes.DIGEST)).setProxyPreferredAuthSchemes(Arrays.asList(AuthSchemes.BASIC));
 
             //proxy
             Config config = PersistentConfig.getInstance().getInitConfig();
@@ -67,7 +62,7 @@ public class HttpClientUtils {
             if (config != null && config.getProxy() && proxySettings != null && proxySettings.USE_HTTP_PROXY && !proxySettings.PROXY_TYPE_IS_SOCKS) {
                 HttpHost proxy = new HttpHost(proxySettings.PROXY_HOST, proxySettings.PROXY_PORT, "http");
                 globalConfigBuilder.setProxy(proxy);
-                if(proxySettings.PROXY_AUTHENTICATION){
+                if (proxySettings.PROXY_AUTHENTICATION) {
                     provider = new BasicCredentialsProvider();
                     provider.setCredentials(new AuthScope(proxy), new UsernamePasswordCredentials(proxySettings.getProxyLogin(), proxySettings.getPlainProxyPassword()));
                 }
@@ -75,11 +70,7 @@ public class HttpClientUtils {
             }
 
 
-            HttpClientBuilder httpClientBuilder = HttpClients.custom()
-                    .setDefaultRequestConfig(globalConfigBuilder.build())
-                    .setDefaultCookieStore(cookieStore)
-                    .setDefaultHeaders(defaultHeader())
-                    .setConnectionManager(getconnectionManager());
+            HttpClientBuilder httpClientBuilder = HttpClients.custom().setDefaultRequestConfig(globalConfigBuilder.build()).setDefaultCookieStore(cookieStore).setDefaultHeaders(defaultHeader()).setConnectionManager(getconnectionManager());
             if (provider != null) {
                 httpClientBuilder.setDefaultCredentialsProvider(provider);
             }
@@ -197,9 +188,7 @@ public class HttpClientUtils {
             SSLContext ctx = SSLContext.getInstance(SSLConnectionSocketFactory.TLS);
             ctx.init(null, new TrustManager[]{trustManager}, null);
             SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(ctx, NoopHostnameVerifier.INSTANCE);
-            Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-                    .register("http", PlainConnectionSocketFactory.INSTANCE)
-                    .register("https", socketFactory).build();
+            Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create().register("http", PlainConnectionSocketFactory.INSTANCE).register("https", socketFactory).build();
             PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
 
             return connectionManager;

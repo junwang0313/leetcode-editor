@@ -14,10 +14,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author zzdcon
  */
 public class OpenInWebAction extends AbstractAction {
-    @Override public void actionPerformed(AnActionEvent anActionEvent, Config config) {
+    @Override
+    public void actionPerformed(AnActionEvent anActionEvent, Config config) {
         JTree tree = anActionEvent.getData(DataKeys.LEETCODE_PROJECTS_TREE);
         DefaultMutableTreeNode note = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         Question question = (Question) note.getUserObject();
-        BrowserUtil.browse(URLUtils.getLeetcodeProblems()+question.getTitleSlug());
+        BrowserUtil.browse(URLUtils.getLeetcodeProblems() + question.getTitleSlug());
     }
 }

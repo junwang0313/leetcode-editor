@@ -7,8 +7,6 @@ import com.intellij.ui.treeStructure.SimpleTree;
 import com.shuzijun.leetcode.plugin.manager.CodeManager;
 import com.shuzijun.leetcode.plugin.model.Question;
 
-
-
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.event.MouseAdapter;

@@ -28,7 +28,7 @@ public class FindActionGroup extends ActionGroup {
 
         if (tags != null && !tags.isEmpty()) {
             for (Tag tag : tags) {
-                if(tag.isSelect()){
+                if (tag.isSelect()) {
                     e.getPresentation().setIcon(AllIcons.General.Filter);
                     return;
                 }

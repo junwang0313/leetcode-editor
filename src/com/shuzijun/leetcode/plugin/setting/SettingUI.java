@@ -32,7 +32,7 @@ import java.io.File;
 /**
  * @author shuzijun
  */
-public class SettingUI extends JDialog  {
+public class SettingUI extends JDialog {
 
     public JPanel mainPanel = new JBPanel();
 
@@ -48,7 +48,7 @@ public class SettingUI extends JDialog  {
 
     private Editor fileNameEditor = null;
     private Editor templateEditor = null;
-    private Editor templateHelpEditor =null;
+    private Editor templateHelpEditor = null;
 
     public SettingUI() {
         setContentPane(mainPanel);
@@ -245,7 +245,7 @@ public class SettingUI extends JDialog  {
         return mainPanel;
     }
 
-    public void disposeUIResources(){
+    public void disposeUIResources() {
         if (this.fileNameEditor != null) {
             EditorFactory.getInstance().releaseEditor(this.fileNameEditor);
             this.fileNameEditor = null;
@@ -254,7 +254,7 @@ public class SettingUI extends JDialog  {
             EditorFactory.getInstance().releaseEditor(this.templateEditor);
             this.templateEditor = null;
         }
-        if (this.templateHelpEditor!=null){
+        if (this.templateHelpEditor != null) {
             EditorFactory.getInstance().releaseEditor(this.templateHelpEditor);
             this.templateHelpEditor = null;
         }

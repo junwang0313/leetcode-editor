@@ -80,9 +80,9 @@ public class SentryUtils {
         }
         context.addTag("javaVersion", SystemInfo.JAVA_RUNTIME_VERSION);
         context.addTag("pluginVersion", PluginManager.getPlugin(PluginId.getId(Constant.PLUGIN_ID)).getVersion());
-        if(error == null){
+        if (error == null) {
             sentry.sendMessage(description);
-        }else {
+        } else {
             sentry.sendException(error);
         }
 

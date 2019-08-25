@@ -46,6 +46,10 @@ public class PersistentConfig implements PersistentStateComponent<PersistentConf
         return initConfig.get(INITNAME);
     }
 
+    public void setInitConfig(Config config) {
+        initConfig.put(INITNAME, config);
+    }
+
     public Config getConfig() {
         Config config = initConfig.get(INITNAME);
         if (config == null) {
@@ -57,21 +61,17 @@ public class PersistentConfig implements PersistentStateComponent<PersistentConf
 
     }
 
-    public void setInitConfig(Config config) {
-        initConfig.put(INITNAME, config);
-    }
-
     public String getTempFilePath() {
         return getConfig().getFilePath() + File.separator + PATH + File.separator + initConfig.get(INITNAME).getAlias() + File.separator;
     }
 
     public void savePassword(String password) {
-        PasswordSafe.getInstance().storePassword(null, this.getClass(), "leetcode-editor", password != null ? password : "");
+        PasswordSafe.getInstance().storePassword(null, getClass(), "leetcode-editor", password != null ? password : "");
     }
 
     public String getPassword() {
         if (getConfig().getVersion() != null) {
-            return PasswordSafe.getInstance().getPassword(null, this.getClass(), "leetcode-editor");
+            return PasswordSafe.getInstance().getPassword(null, getClass(), "leetcode-editor");
         } else {
             return getInitConfig().getPassword();
         }

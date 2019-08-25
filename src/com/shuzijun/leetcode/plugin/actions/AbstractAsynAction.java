@@ -11,12 +11,7 @@ public abstract class AbstractAsynAction extends AbstractAction {
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent, Config config) {
-        ApplicationManager.getApplication().executeOnPooledThread(new Runnable() {
-            @Override
-            public void run() {
-                perform(anActionEvent, config);
-            }
-        });
+        ApplicationManager.getApplication().executeOnPooledThread(() -> perform(anActionEvent, config));
     }
 
     public abstract void perform(AnActionEvent anActionEvent, Config config);

@@ -19,7 +19,7 @@ public class WindowFactory implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
         ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        JComponent navigatorPanel=  new NavigatorPanel(toolWindow,project);
+        JComponent navigatorPanel = new NavigatorPanel(toolWindow, project);
         navigatorPanel.addAncestorListener(new UpdatePluginListener());
         Content content = contentFactory.createContent(navigatorPanel, "", false);
         toolWindow.getContentManager().addContent(content);

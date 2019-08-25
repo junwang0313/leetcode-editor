@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @author shuzijun
  */
-public class UpdateUtils{
+public class UpdateUtils {
 
     public static Boolean isCheck = true;
 

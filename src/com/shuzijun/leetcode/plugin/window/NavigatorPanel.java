@@ -2,7 +2,10 @@ package com.shuzijun.leetcode.plugin.window;
 
 
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionToolbar;
+import com.intellij.openapi.actionSystem.DataProvider;
+import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.openapi.wm.ToolWindow;
@@ -46,7 +49,7 @@ public class NavigatorPanel extends SimpleToolWindowPanel implements DataProvide
                 String addIconText = "'login'";
                 String refreshIconText = "'refresh'";
                 String configIconText = "'config'";
-                String message = PropertiesUtils.getInfo("config.load", addIconText, refreshIconText,configIconText);
+                String message = PropertiesUtils.getInfo("config.load", addIconText, refreshIconText, configIconText);
                 int addIconMarkerIndex = message.indexOf(addIconText);
                 myPane.replaceSelection(message.substring(0, addIconMarkerIndex));
                 myPane.insertIcon(AllIcons.General.Web);
@@ -64,7 +67,7 @@ public class NavigatorPanel extends SimpleToolWindowPanel implements DataProvide
             protected void paintComponent(Graphics g) {
                 try {
                     super.paintComponent(g);
-                }catch (Exception e){
+                } catch (Exception e) {
                     return;
                 }
 
@@ -98,9 +101,7 @@ public class NavigatorPanel extends SimpleToolWindowPanel implements DataProvide
         tree.addTreeWillExpandListener(new TreeeWillListener(tree, toolWindow));
 
 
-        ActionToolbar actionToolbar = actionManager.createActionToolbar("leetcode Toolbar",
-                (DefaultActionGroup) actionManager.getAction("leetcode.NavigatorActionsToolbar"),
-                true);
+        ActionToolbar actionToolbar = actionManager.createActionToolbar("leetcode Toolbar", (DefaultActionGroup) actionManager.getAction("leetcode.NavigatorActionsToolbar"), true);
 
         actionToolbar.setTargetComponent(tree);
         setToolbar(actionToolbar.getComponent());
@@ -121,9 +122,7 @@ public class NavigatorPanel extends SimpleToolWindowPanel implements DataProvide
         queryField.addKeyListener(new QueryKeyListener(queryField, contentScrollPanel, toolWindow));
         queryPanel.add(queryField);
 
-        ActionToolbar findToolbar = actionManager.createActionToolbar("",
-                (DefaultActionGroup) actionManager.getAction("leetcode.find.Toolbar"),
-                true);
+        ActionToolbar findToolbar = actionManager.createActionToolbar("", (DefaultActionGroup) actionManager.getAction("leetcode.find.Toolbar"), true);
         findToolbar.setTargetComponent(tree);
         queryPanel.add(findToolbar.getComponent());
 

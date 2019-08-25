@@ -14,7 +14,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 /**
  * @author shuzijun
  */
-public class OpenContentAction  extends AbstractAction {
+public class OpenContentAction extends AbstractAction {
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent, Config config) {

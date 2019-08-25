@@ -56,12 +56,7 @@ public class LoginAction extends AbstractAsynAction {
 
         HttpPost post = new HttpPost(URLUtils.getLeetcodeLogin());
         try {
-            HttpEntity ent = MultipartEntityBuilder.create()
-                    .addTextBody("csrfmiddlewaretoken", HttpClientUtils.getToken())
-                    .addTextBody("login", config.getLoginName())
-                    .addTextBody("password", PersistentConfig.getInstance().getPassword())
-                    .addTextBody("next", "/problems")
-                    .build();
+            HttpEntity ent = MultipartEntityBuilder.create().addTextBody("csrfmiddlewaretoken", HttpClientUtils.getToken()).addTextBody("login", config.getLoginName()).addTextBody("password", PersistentConfig.getInstance().getPassword()).addTextBody("next", "/problems").build();
             post.setEntity(ent);
             CloseableHttpResponse loginResponse = HttpClientUtils.executePost(post);
 
@@ -72,14 +67,13 @@ public class LoginAction extends AbstractAsynAction {
 
             String body = EntityUtils.toString(loginResponse.getEntity(), "UTF-8");
 
-            if ((loginResponse.getStatusLine().getStatusCode() == 200 || loginResponse.getStatusLine().getStatusCode() == 302)
-                    && StringUtils.isBlank(body)) {
+            if ((loginResponse.getStatusLine().getStatusCode() == 200 || loginResponse.getStatusLine().getStatusCode() == 302) && StringUtils.isBlank(body)) {
                 examineEmail();
                 MessageUtils.showInfoMsg("info", PropertiesUtils.getInfo("login.success"));
             } else {
                 HttpClientUtils.resetHttpclient();
                 MessageUtils.showInfoMsg("info", PropertiesUtils.getInfo("login.unknown"));
-                SentryUtils.submitErrorReport(null,String.format("login.unknown:\nStatusCode:%s\nbody:%s",loginResponse.getStatusLine().getStatusCode(),body));
+                SentryUtils.submitErrorReport(null, String.format("login.unknown:\nStatusCode:%s\nbody:%s", loginResponse.getStatusLine().getStatusCode(), body));
                 return;
             }
         } catch (Exception e) {

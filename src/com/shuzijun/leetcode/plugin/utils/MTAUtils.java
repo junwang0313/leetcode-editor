@@ -22,25 +22,17 @@ import java.util.concurrent.Executors;
  */
 public class MTAUtils {
 
+    private static final PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
     private static String URL = "http://pingtcss.qq.com/pingd";
     private static String SID = "500676642";
     private static String SI = getI("s");
-
     private static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-    private static final PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
 
     public static CloseableHttpClient getHttpClient() {
 
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectionRequestTimeout(1000)
-                .setConnectTimeout(1000)
-                .setSocketTimeout(1000)
-                .build();
+        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(1000).setConnectTimeout(1000).setSocketTimeout(1000).build();
 
-        return HttpClients.custom()
-                .setDefaultRequestConfig(requestConfig)
-                .setConnectionManager(connManager)
-                .build();
+        return HttpClients.custom().setDefaultRequestConfig(requestConfig).setConnectionManager(connManager).build();
     }
 
     public static String getI(String prefix) {
@@ -79,25 +71,7 @@ public class MTAUtils {
             try {
                 Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
                 Calendar calendar = Calendar.getInstance();
-                URI uri = new URIBuilder(URL)
-                        .setParameter("dm", "127.0.0.1")
-                        .setParameter("pvi", config.getId())
-                        .setParameter("si", SI)
-                        .setParameter("url", "/" + actionsId)
-                        .setParameter("arg", "")
-                        .setParameter("ty", "0")
-                        .setParameter("rdm", "")
-                        .setParameter("rurl", "")
-                        .setParameter("rarg", "")
-                        .setParameter("adt", "")
-                        .setParameter("r2", SID)
-                        .setParameter("scr", (int)screensize.getWidth() + "x" + (int)screensize.getHeight())
-                        .setParameter("scl", Toolkit.getDefaultToolkit().getScreenResolution() + "-bit")
-                        .setParameter("lg", Locale.getDefault().toString().replace("_", "-").toLowerCase())
-                        .setParameter("tz", -(calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET)) / 60000 / 60 + "")
-                        .setParameter("ext", "version=2.0.14")
-                        .setParameter("random", System.currentTimeMillis() + "")
-                        .build();
+                URI uri = new URIBuilder(URL).setParameter("dm", "127.0.0.1").setParameter("pvi", config.getId()).setParameter("si", SI).setParameter("url", "/" + actionsId).setParameter("arg", "").setParameter("ty", "0").setParameter("rdm", "").setParameter("rurl", "").setParameter("rarg", "").setParameter("adt", "").setParameter("r2", SID).setParameter("scr", (int) screensize.getWidth() + "x" + (int) screensize.getHeight()).setParameter("scl", Toolkit.getDefaultToolkit().getScreenResolution() + "-bit").setParameter("lg", Locale.getDefault().toString().replace("_", "-").toLowerCase()).setParameter("tz", -(calendar.get(Calendar.ZONE_OFFSET) + calendar.get(Calendar.DST_OFFSET)) / 60000 / 60 + "").setParameter("ext", "version=2.0.14").setParameter("random", System.currentTimeMillis() + "").build();
 
                 HttpGet get = new HttpGet(uri);
 

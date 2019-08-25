@@ -185,13 +185,13 @@ public class ExploreManager {
                 String body = EntityUtils.toString(response.getEntity(), "UTF-8");
 
                 JSONObject object = JSONObject.parseObject(body).getJSONObject("data").getJSONObject("item");
-                if (object!=null){
+                if (object != null) {
                     q.setStatus(object.getBoolean("paidOnly") ? "lock" : null);
                     JSONObject question = object.getJSONObject(q.getLangSlug());
-                    if(Constant.ITEM_TYPE_QUESTION.equals(q.getLangSlug())){
+                    if (Constant.ITEM_TYPE_QUESTION.equals(q.getLangSlug())) {
                         q.setQuestionId(question.getString("questionId"));
                         q.setTitleSlug(question.getString("titleSlug"));
-                    }else {
+                    } else {
                         q.setNodeType(Constant.NODETYPE_DEF);
                         q.setQuestionId(question.getString("id"));
                     }
@@ -210,7 +210,7 @@ public class ExploreManager {
 
         HttpPost post = new HttpPost(URLUtils.getLeetcodeGraphql());
         try {
-            StringEntity entity = new StringEntity("{\"operationName\":\"GetHtmlArticle\",\"variables\":{\"htmlArticleId\":\""+q.getQuestionId()+"\"},\"query\":\"query GetHtmlArticle($htmlArticleId: String!) {\\n  htmlArticle(id: $htmlArticleId) {\\n    id\\n    html\\n    originalLink\\n    __typename\\n  }\\n}\\n\"}");
+            StringEntity entity = new StringEntity("{\"operationName\":\"GetHtmlArticle\",\"variables\":{\"htmlArticleId\":\"" + q.getQuestionId() + "\"},\"query\":\"query GetHtmlArticle($htmlArticleId: String!) {\\n  htmlArticle(id: $htmlArticleId) {\\n    id\\n    html\\n    originalLink\\n    __typename\\n  }\\n}\\n\"}");
             post.setEntity(entity);
             post.setHeader("Accept", "application/json");
             post.setHeader("Content-type", "application/json");
@@ -220,7 +220,7 @@ public class ExploreManager {
                 String body = EntityUtils.toString(response.getEntity(), "UTF-8");
 
                 JSONObject object = JSONObject.parseObject(body).getJSONObject("data").getJSONObject("htmlArticle");
-                if (object!=null){
+                if (object != null) {
                     return object.getString("html");
                 }
             }
@@ -237,7 +237,7 @@ public class ExploreManager {
 
         HttpPost post = new HttpPost(URLUtils.getLeetcodeGraphql());
         try {
-            StringEntity entity = new StringEntity("{\"operationName\":\"GetArticle\",\"variables\":{\"articleId\":\""+q.getQuestionId()+"\"},\"query\":\"query GetArticle($articleId: String!) {\\n  article(id: $articleId) {\\n    id\\n    title\\n    body\\n    __typename\\n  }\\n}\\n\"}");
+            StringEntity entity = new StringEntity("{\"operationName\":\"GetArticle\",\"variables\":{\"articleId\":\"" + q.getQuestionId() + "\"},\"query\":\"query GetArticle($articleId: String!) {\\n  article(id: $articleId) {\\n    id\\n    title\\n    body\\n    __typename\\n  }\\n}\\n\"}");
             post.setEntity(entity);
             post.setHeader("Accept", "application/json");
             post.setHeader("Content-type", "application/json");
@@ -247,7 +247,7 @@ public class ExploreManager {
                 String body = EntityUtils.toString(response.getEntity(), "UTF-8");
 
                 JSONObject object = JSONObject.parseObject(body).getJSONObject("data").getJSONObject("article");
-                if (object!=null){
+                if (object != null) {
                     return object.getString("body");
                 }
             }

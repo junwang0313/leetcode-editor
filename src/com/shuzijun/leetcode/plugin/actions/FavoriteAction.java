@@ -39,7 +39,7 @@ public class FavoriteAction extends ToggleAction {
         Question question = (Question) note.getUserObject();
         if (b) {
             FavoriteManager.addQuestionToFavorite(tag, question);
-        }else {
+        } else {
             FavoriteManager.removeQuestionFromFavorite(tag, question);
         }
 

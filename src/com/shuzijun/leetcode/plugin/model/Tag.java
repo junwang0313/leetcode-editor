@@ -38,6 +38,7 @@ public class Tag {
     public TreeSet<String> getQuestions() {
         return questions;
     }
+
     public void addQuestion(String questionId) {
         questions.add(questionId);
     }

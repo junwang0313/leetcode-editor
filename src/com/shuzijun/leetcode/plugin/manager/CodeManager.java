@@ -346,6 +346,20 @@ public class CodeManager {
         return sb.toString();
     }
 
+    private static String buildSumitErrorMsg(JSONObject errorBody) {
+        String statusMsg = errorBody.getString("status_msg");
+        if (StringUtils.isNotBlank(statusMsg)) {
+            if (statusMsg.equals("Compile Error")) {
+                return errorBody.getString("full_compile_error");
+            } else if (statusMsg.equals("Runtime Error")) {
+                return errorBody.getString("full_runtime_error");
+            } else {
+                return statusMsg;
+            }
+        }
+        return "Unknown error";
+    }
+
     private static class SubmitCheckTask implements Runnable {
 
         private Question question;
@@ -415,21 +429,6 @@ public class CodeManager {
             MessageUtils.showInfoMsg("info", PropertiesUtils.getInfo("response.timeout"));
         }
     }
-
-    private static String buildSumitErrorMsg(JSONObject errorBody) {
-        String statusMsg = errorBody.getString("status_msg");
-        if (StringUtils.isNotBlank(statusMsg)) {
-            if (statusMsg.equals("Compile Error")) {
-                return errorBody.getString("full_compile_error");
-            } else if (statusMsg.equals("Runtime Error")) {
-                return errorBody.getString("full_runtime_error");
-            } else {
-                return statusMsg;
-            }
-        }
-        return "Unknown error";
-    }
-
 
     private static class RunCodeCheckTask implements Runnable {
         private JSONObject returnObj;

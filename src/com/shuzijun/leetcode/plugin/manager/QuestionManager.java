@@ -31,12 +31,9 @@ import java.util.*;
 public class QuestionManager {
 
 
-    private  static List<Question> QUESTIONLIST = null;
-
     private final static String ALLNAME = "all.json";
-
     private final static String TRANSLATIONNAME = "translation.json";
-
+    private static List<Question> QUESTIONLIST = null;
 
     public static List<Question> getQuestionService() {
         List<Question> questionList = null;
@@ -63,7 +60,7 @@ public class QuestionManager {
     }
 
     public static List<Question> getQuestionCache() {
-        if(QUESTIONLIST != null){
+        if (QUESTIONLIST != null) {
             return QUESTIONLIST;
         }
 
@@ -200,9 +197,9 @@ public class QuestionManager {
                 question.setQuestionId(object.getJSONObject("stat").getString("question_id"));
                 question.setFrontendQuestionId(object.getJSONObject("stat").getString("frontend_question_id"));
                 try {
-                    if(object.getBoolean("paid_only") && isPremium){
+                    if (object.getBoolean("paid_only") && isPremium) {
                         question.setStatus(object.getBoolean("paid_only") ? "lock" : null);
-                    }else {
+                    } else {
                         question.setStatus(object.get("status") == null ? "" : object.getString("status"));
                     }
                 } catch (Exception ee) {
@@ -255,7 +252,7 @@ public class QuestionManager {
                         translationMap.put(object.getJSONObject("question").getString("questionId"), object.getString("title"));
                     }
                     for (Question question : questions) {
-                        if(translationMap.containsKey(question.getQuestionId())){
+                        if (translationMap.containsKey(question.getQuestionId())) {
                             question.setTitle(translationMap.get(question.getQuestionId()));
                         }
                     }

@@ -29,11 +29,10 @@ public abstract class AbstractAction extends AnAction {
         }
 
         try {
-            MTAUtils.click(anActionEvent.getActionManager().getId(this),config);
+            MTAUtils.click(anActionEvent.getActionManager().getId(this), config);
             UpdateUtils.examine(config);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
-
 
 
         actionPerformed(anActionEvent, config);

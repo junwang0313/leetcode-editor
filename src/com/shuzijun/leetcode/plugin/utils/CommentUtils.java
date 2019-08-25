@@ -21,7 +21,7 @@ public class CommentUtils {
         }
         pageData = pageData.replaceAll("(\\r\\n|\\r|\\n|\\n\\r)", "");
         pageData = pageData.substring(0, pageData.length() - 1);
-        pageData = pageData.replaceAll("status_code: parseInt\\('\\d+', \\d+\\),","");
+        pageData = pageData.replaceAll("status_code: parseInt\\('\\d+', \\d+\\),", "");
         return pageData;
     }
 }

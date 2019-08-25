@@ -116,15 +116,15 @@ public class FileUtils {
     }
 
     public static void copyDirectory(File srcDir, File destDir, boolean preserveFileDate) throws IOException {
-        if(srcDir == null) {
+        if (srcDir == null) {
             throw new NullPointerException("Source must not be null");
-        } else if(destDir == null) {
+        } else if (destDir == null) {
             throw new NullPointerException("Destination must not be null");
-        } else if(!srcDir.exists()) {
+        } else if (!srcDir.exists()) {
             throw new FileNotFoundException("Source \'" + srcDir + "\' does not exist");
-        } else if(!srcDir.isDirectory()) {
+        } else if (!srcDir.isDirectory()) {
             throw new IOException("Source \'" + srcDir + "\' exists but is not a directory");
-        } else if(srcDir.getCanonicalPath().equals(destDir.getCanonicalPath())) {
+        } else if (srcDir.getCanonicalPath().equals(destDir.getCanonicalPath())) {
             throw new IOException("Source \'" + srcDir + "\' and destination \'" + destDir + "\' are the same");
         } else {
             doCopyDirectory(srcDir, destDir, preserveFileDate);
@@ -132,30 +132,30 @@ public class FileUtils {
     }
 
     private static void doCopyDirectory(File srcDir, File destDir, boolean preserveFileDate) throws IOException {
-        if(destDir.exists()) {
-            if(!destDir.isDirectory()) {
+        if (destDir.exists()) {
+            if (!destDir.isDirectory()) {
                 throw new IOException("Destination \'" + destDir + "\' exists but is not a directory");
             }
         } else {
-            if(!destDir.mkdirs()) {
+            if (!destDir.mkdirs()) {
                 throw new IOException("Destination \'" + destDir + "\' directory cannot be created");
             }
 
-            if(preserveFileDate) {
+            if (preserveFileDate) {
                 destDir.setLastModified(srcDir.lastModified());
             }
         }
 
-        if(!destDir.canWrite()) {
+        if (!destDir.canWrite()) {
             throw new IOException("Destination \'" + destDir + "\' cannot be written to");
         } else {
             File[] files = srcDir.listFiles();
-            if(files == null) {
+            if (files == null) {
                 throw new IOException("Failed to list contents of " + srcDir);
             } else {
-                for(int i = 0; i < files.length; ++i) {
+                for (int i = 0; i < files.length; ++i) {
                     File copiedFile = new File(destDir, files[i].getName());
-                    if(files[i].isDirectory()) {
+                    if (files[i].isDirectory()) {
                         doCopyDirectory(files[i], copiedFile, preserveFileDate);
                     } else {
                         doCopyFile(files[i], copiedFile, preserveFileDate);
@@ -167,7 +167,7 @@ public class FileUtils {
     }
 
     private static void doCopyFile(File srcFile, File destFile, boolean preserveFileDate) throws IOException {
-        if(destFile.exists() && destFile.isDirectory()) {
+        if (destFile.exists() && destFile.isDirectory()) {
             throw new IOException("Destination \'" + destFile + "\' exists but is a directory");
         } else {
             FileInputStream input = new FileInputStream(srcFile);
@@ -184,10 +184,10 @@ public class FileUtils {
                 IOUtils.closeQuietly(input);
             }
 
-            if(srcFile.length() != destFile.length()) {
+            if (srcFile.length() != destFile.length()) {
                 throw new IOException("Failed to copy full contents from \'" + srcFile + "\' to \'" + destFile + "\'");
             } else {
-                if(preserveFileDate) {
+                if (preserveFileDate) {
                     destFile.setLastModified(srcFile.lastModified());
                 }
 
